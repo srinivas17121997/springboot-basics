@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: prodname
+app:
+  message: hello-prod
+  name: dev-application
+  app: pratice
