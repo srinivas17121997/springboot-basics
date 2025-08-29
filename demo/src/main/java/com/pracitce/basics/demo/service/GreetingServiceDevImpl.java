@@ -1,5 +1,8 @@
 package com.pracitce.basics.demo.service;
 
+import com.pracitce.basics.demo.exceptions.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,8 @@ import org.springframework.stereotype.Service;
 //@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Profile("dev")
 public class GreetingServiceDevImpl implements GreetingService {
+
+    private static final Logger logger= LoggerFactory.getLogger(GreetingServiceDevImpl.class);
     final String greetingTemplate="Hello %s how are you?.";
     @Value("${app.message}")
     String message;
@@ -24,6 +29,8 @@ public class GreetingServiceDevImpl implements GreetingService {
 
     @Override
     public String getGreeting(String name) {
-        return greetingTemplate.formatted(name)+message;
+        logger.info("Request for name :{}",name);
+        throw new BusinessException("Illegal argument");
+        //return greetingTemplate.formatted(name)+message;
     }
 }
