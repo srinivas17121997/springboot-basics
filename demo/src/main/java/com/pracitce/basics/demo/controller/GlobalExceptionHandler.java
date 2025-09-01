@@ -2,6 +2,7 @@ package com.pracitce.basics.demo.controller;
 
 import com.pracitce.basics.demo.exceptions.BusinessException;
 import com.pracitce.basics.demo.DTO.ErrorResponses;
+import com.pracitce.basics.demo.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,9 +26,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponses,HttpStatus.BAD_REQUEST);
     }
 
-   /* @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponses> handleValidationFailure(MethodArgumentNotValidException methodArgumentNotValidException)
-    {
-
-    }*/
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponses> handleUserNotFoundException(UserNotFoundException userNotFoundException){
+        ErrorResponses errorResponses= new ErrorResponses(userNotFoundException.getMessage(),LocalDateTime.now(),HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<>(errorResponses,HttpStatus.NOT_FOUND);
+    }
 }

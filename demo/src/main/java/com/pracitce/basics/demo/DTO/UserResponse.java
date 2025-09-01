@@ -1,15 +1,18 @@
-package com.pracitce.basics.demo.model;
+package com.pracitce.basics.demo.DTO;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class UserResponse {
     private String name;
     private String email;
+    private int id;
+
+    public UserResponse() {
+    }
+
+    public UserResponse(String name, String email, int id) {
+        this.name = name;
+        this.email = email;
+        this.id = id;
+    }
 
     public int getId() {
         return id;
